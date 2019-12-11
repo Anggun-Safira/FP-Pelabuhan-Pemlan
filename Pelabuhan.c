@@ -1,4 +1,121 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <conio.h>
+#include <windows.h>
+/* run this program using the console pauser or add your own getch, system("pause") or input loop */
 
+struct penumpang{
+	int nomorTiket;
+	int nomorKendaraan;
+	int bobotKendaraan;
+	char jenisKendaraan[30];
+};
+
+struct data{
+	char tujuanPelabuhan[30];
+	int tanggal;
+	int bulan;
+	int tahun;
+	struct penumpang pnpg;
+};
+typedef struct data dat;
+dat dt[100];
+
+
+int searchNomor(dat arr[], int n, int x) 
+{ 
+    int i; 
+    for (i = 0; i < n; i++) 
+        if (dt[i].pnpg.nomorKendaraan==x)
+        	return i;
+    return -1;	
+}
+
+int searchBobot(dat arr[], int n, int x) 
+{ 
+    int i; 
+    for (i = 0; i < n; i++) 
+        if (dt[i].pnpg.bobotKendaraan==x) 
+            return i; 
+    return -1; 
+}
+
+int searchTiket(dat arr[], int n, int x)
+{
+	int i;
+	for (i = 0; i < n; i++)
+		if (dt[i].pnpg.nomorTiket==x)
+			return i;
+	return -1;	
+}
+
+   
+void CocktailBobot(dat a[], int n)  
+{
+	dat temp;  
+    int is_swapped = 1;  
+    int begin = 0,i;  
+    int end = n - 1;  
+   
+    while (is_swapped) {  
+        is_swapped = 0;  
+     for (i = begin; i < end; ++i) {  
+            if (a[i].pnpg.bobotKendaraan > a[i + 1].pnpg.bobotKendaraan) {  
+            temp = a[i];  
+        a[i]=a[i+1];  
+        a[i+1]=temp;                  
+        is_swapped = 1;  
+            }  
+        }  
+ if (!is_swapped)  
+            break;  
+ is_swapped = 0;  
+ for (i = end - 1; i >= begin; --i) {  
+     if (a[i].pnpg.bobotKendaraan > a[i + 1].pnpg.bobotKendaraan)   
+    {  
+          temp = a[i];  
+      a[i]=a[i+1];  
+      a[i+1]=temp;  
+      is_swapped = 1;  
+         }  
+      }  
+        ++begin;  
+    }  
+}  
+
+void CocktailTiket(dat a[], int n)  
+{
+	dat temp;  
+    int is_swapped = 1;  
+    int begin = 0,i;  
+    int end = n - 1;  
+   
+    while (is_swapped) {  
+        is_swapped = 0;  
+     for (i = begin; i < end; ++i) {  
+            if (a[i].pnpg.nomorTiket > a[i + 1].pnpg.nomorTiket) {  
+            temp = a[i];  
+        a[i]=a[i+1];  
+        a[i+1]=temp;                  
+        is_swapped = 1;  
+            }  
+        }  
+ if (!is_swapped)  
+            break;  
+ is_swapped = 0;  
+ for (i = end - 1; i >= begin; --i) {  
+     if (a[i].pnpg.nomorTiket > a[i + 1].pnpg.nomorTiket)   
+    {  
+          temp = a[i];  
+      a[i]=a[i+1];  
+      a[i+1]=temp;  
+      is_swapped = 1;  
+         }  
+      }  
+        ++begin;  
+    }  
+}  
 void CocktailTujuan(struct data a[], int n)
 {
 	dat temp;  
@@ -33,6 +150,104 @@ void CocktailTujuan(struct data a[], int n)
 }
 
 
+void CocktailNopol(dat a[], int n)  
+{
+	dat temp;  
+    int is_swapped = 1;  
+    int begin = 0,i;  
+    int end = n - 1;  
+   
+    while (is_swapped) {  
+        is_swapped = 0;  
+     for (i = begin; i < end; ++i) {  
+            if (strcmp((a[i].pnpg.nomorKendaraan),(a[i + 1].pnpg.nomorKendaraan))<0) {  
+            temp = a[i];  
+        a[i]=a[i+1];  
+        a[i+1]=temp;                  
+        is_swapped = 1;  
+            }  
+        }  
+ if (!is_swapped)  
+            break;  
+ is_swapped = 0;  
+ for (i = end - 1; i >= begin; --i) {  
+     if (strcmp((a[i].pnpg.nomorKendaraan),(a[i + 1].pnpg.nomorKendaraan))<0)   
+    {  
+        temp = a[i];  
+      a[i]=a[i+1];  
+      a[i+1]=temp;  
+      is_swapped = 1;  
+         }  
+      }  
+        ++begin;  
+    }  
+}  
+
+void CocktailJenis(dat a[], int n)  
+{
+	dat temp;  
+    int is_swapped = 1;  
+    int begin = 0,i;  
+    int end = n - 1;  
+   
+    while (is_swapped) {  
+        is_swapped = 0;  
+     for (i = begin; i < end; ++i) {  
+            if (strcmp((a[i].pnpg.jenisKendaraan),(a[i + 1].pnpg.jenisKendaraan))<0) {  
+            temp = a[i];  
+        a[i]=a[i+1];  
+        a[i+1]=temp;                  
+        is_swapped = 1;  
+            }  
+        }  
+ if (!is_swapped)  
+            break;  
+ is_swapped = 0;  
+ for (i = end - 1; i >= begin; --i) {  
+     if (strcmp((a[i].pnpg.jenisKendaraan),(a[i + 1].pnpg.jenisKendaraan))<0)   
+    {  
+        temp = a[i];  
+      a[i]=a[i+1];  
+      a[i+1]=temp;  
+      is_swapped = 1;  
+         }  
+      }  
+        ++begin;  
+    }  
+}
+
+void CocktailTanggal(struct data a[], int n)  
+{
+	dat temp;  
+    int is_swapped = 1;  
+    int begin = 0,i;  
+    int end = n - 1;  
+   
+    while (is_swapped) {  
+        is_swapped = 0;  
+     for (i = begin; i < end; ++i) {  
+            if (a[i].tanggal&a[i].bulan&a[i].tahun > a[i + 1].tanggal&a[i + 1].bulan&a[i + 1].tahun) {  
+            temp = a[i];  
+        a[i]=a[i+1];  
+        a[i+1]=temp;                  
+        is_swapped = 1;  
+            }  
+        }  
+ if (!is_swapped)  
+            break;  
+ is_swapped = 0;  
+ for (i = end - 1; i >= begin; --i) {  
+     if (a[i].tanggal&a[i].bulan&a[i].tahun > a[i + 1].tanggal&a[i + 1].bulan&a[i + 1].tahun)   
+    {  
+          temp = a[i];  
+      a[i]=a[i+1];  
+      a[i+1]=temp;  
+      is_swapped = 1;  
+         }  
+      }  
+        ++begin;  
+    }  
+}
 int main() {
 	
 
@@ -280,3 +495,90 @@ int main() {
 				system("cls");
 		}
 	}
+	else if (pilih==8){
+		CocktailTiket(dt, a);
+		for(i=0;i<a;i++){
+				printf("\n\n");
+				printf("Bobot Kendaraan	= %d ton\n",dt[i].pnpg.bobotKendaraan);
+				printf("Nomor Kendaraan	= %d\n",dt[i].pnpg.nomorKendaraan);
+				printf("Nomor Tiket		= %d\n",dt[i].pnpg.nomorTiket);
+				printf("Jenis Kendaraan	= %s\n",dt[i].pnpg.jenisKendaraan);
+				printf("Tujuan Pelabuhan= %s\n",dt[i].tujuanPelabuhan);
+				printf("Tanggal Tiket	= %d-%d-%d",dt[i].tanggal,dt[i].bulan,dt[i].tahun);	
+		
+		}	
+}
+
+	else if (pilih==9)	{
+		CocktailNopol(dt, a);
+		for(i=0;i<a;i++){
+				printf("\n\n");
+				printf("Bobot Kendaraan	= %d ton\n",dt[i].pnpg.bobotKendaraan);
+				printf("Nomor Kendaraan	= %d\n",dt[i].pnpg.nomorKendaraan);
+				printf("Nomor Tiket		= %d\n",dt[i].pnpg.nomorTiket);
+				printf("Jenis Kendaraan	= %s\n",dt[i].pnpg.jenisKendaraan);
+				printf("Tujuan Pelabuhan= %s\n",dt[i].tujuanPelabuhan);
+				printf("Tanggal Tiket	= %d-%d-%d",dt[i].tanggal,dt[i].bulan,dt[i].tahun);	
+		}
+
+}
+	else if (pilih==10)	{
+		CocktailJenis(dt, a);
+		for(i=0;i<a;i++){
+				printf("\n\n");
+				printf("Bobot Kendaraan	= %d ton\n",dt[i].pnpg.bobotKendaraan);
+				printf("Nomor Kendaraan	= %d\n",dt[i].pnpg.nomorKendaraan);
+				printf("Nomor Tiket		= %d\n",dt[i].pnpg.nomorTiket);
+				printf("Jenis Kendaraan	= %s\n",dt[i].pnpg.jenisKendaraan);
+				printf("Tujuan Pelabuhan= %s\n",dt[i].tujuanPelabuhan);
+				printf("Tanggal Tiket	= %d-%d-%d",dt[i].tanggal,dt[i].bulan,dt[i].tahun);	
+		}
+
+}
+	else if (pilih==11)	{
+	CocktailBobot(dt , a);
+	for(i=0;i<a;i++){
+				printf("\n\n");
+				printf("Bobot Kendaraan	= %d ton\n",dt[i].pnpg.bobotKendaraan);
+				printf("Nomor Kendaraan	= %d\n",dt[i].pnpg.nomorKendaraan);
+				printf("Nomor Tiket		= %d\n",dt[i].pnpg.nomorTiket);
+				printf("Jenis Kendaraan	= %s\n",dt[i].pnpg.jenisKendaraan);
+				printf("Tujuan Pelabuhan= %s\n",dt[i].tujuanPelabuhan);
+				printf("Tanggal Tiket	= %d-%d-%d",dt[i].tanggal,dt[i].bulan,dt[i].tahun);	
+		
+	}
+}
+		else if (pilih==12){
+		CocktailTanggal(dt, a);
+		for(i=0;i<a;i++){
+				printf("\n\n");
+				printf("Bobot Kendaraan	= %d ton\n",dt[i].pnpg.bobotKendaraan);
+				printf("Nomor Kendaraan	= %d\n",dt[i].pnpg.nomorKendaraan);
+				printf("Nomor Tiket		= %d\n",dt[i].pnpg.nomorTiket);
+				printf("Jenis Kendaraan	= %s\n",dt[i].pnpg.jenisKendaraan);
+				printf("Tujuan Pelabuhan= %s\n",dt[i].tujuanPelabuhan);
+				printf("Tanggal Tiket	= %d-%d-%d",dt[i].tanggal,dt[i].bulan,dt[i].tahun);	
+		
+		}	
+}
+	else if (pilih==13)	{
+		CocktailJenis(dt, a);
+		for(i=0;i<a;i++){
+				printf("\n\n");
+				printf("Bobot Kendaraan	= %d ton\n",dt[i].pnpg.bobotKendaraan);
+				printf("Nomor Kendaraan	= %d\n",dt[i].pnpg.nomorKendaraan);
+				printf("Nomor Tiket		= %d\n",dt[i].pnpg.nomorTiket);
+				printf("Jenis Kendaraan	= %s\n",dt[i].pnpg.jenisKendaraan);
+				printf("Tujuan Pelabuhan= %s\n",dt[i].tujuanPelabuhan);
+				printf("Tanggal Tiket	= %d-%d-%d",dt[i].tanggal,dt[i].bulan,dt[i].tahun);	
+		}
+
+}
+	else if(pilih==14){
+		system("cls");
+		printf("Terimakasih, selamat datang kembali");
+	}
+}
+
+	return 0;
+}
